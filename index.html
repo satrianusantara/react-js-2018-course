@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+    <script type="text/babel">
+      //create a header element using react.create element with the name of element that we want to create,atribute of element, and the child of the element
+      //if using jsx, it would be like an formerly html, no need to write React.createElement('h1',null, 'Hello World'); every time we want to build element
+
+      //class is more power than const, used for more custom interaction with other feature in the next level. such a clicked action, etc
+      class Counter extends React.Component {
+        constructor(){
+          super();
+          this.state = {
+            count:0
+          };
+          this.handleAdd = this.handleAdd.bind(this);
+          this.handleSubstract = this.handleSubstract.bind(this);
+        }
+        handleSubstract(){
+          this.setState({
+            count: this.state.count - 1
+          });
+        }
+        handleAdd(){
+          this.setState({
+            count: this.state.count + 1
+          })
+        }
+        //render function is must have function in every class
+        render(){
+          return <div>
+            <button onClick={this.handleSubstract}>-</button>
+            <span style={{padding : '10px'}}>{this.state.count}</span>
+            <button onClick={this.handleAdd}>+</button>
+          </div>
+
+        }
+      }
+      const App = function(){
+        return <div>
+          <Counter />
+        </div>
+      }
+      //we put it on the dom using render function. pass in the Component, the second parameter is where exactly we want to put the Header
+      //wether have many rendering reactDOM, it's better if we just call the other const on the main const and render the main const only
+      ReactDOM.render(<App/>, document.getElementById('app'));
+    </script>
+    </body>
+
+
+</html>
